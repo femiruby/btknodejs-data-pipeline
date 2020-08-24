@@ -3,7 +3,7 @@ import {parentPort} from "worker_threads";
 import https from "https";
 
 parentPort?.on("message", ({start,end,data,year}:{start:number,end:number,data:any[],year:number})  => {
-    // from to now in months
+    // from "year" to "now" in months
     let months = (new Date().getFullYear()-year)*12
     months += new Date().getMonth()
     let monthsI = 1, yearI = 0;
@@ -34,27 +34,10 @@ parentPort?.on("message", ({start,end,data,year}:{start:number,end:number,data:a
             headers: {Authorization: `Bearer ${OANDA_TOKEN}`, "content-type":"application/json"},
         }
 
-        // let res = []
-        // let i = start
-        // const rec = () => new Promise((rs,rj) => {
-        //     fetch(instruments[i],options).then(f => f.json()).then(f => {
-        //         res.push(f)
-        //         if (i < end) {
-        //             i++
-        //             rec()
-        //         } else {
-        //             rs(true)
-        //         }
-        //     }).catch(rj)
-        // })
-        //
-        // rec().then(f => {
-        //     console.log(99)
-        // }).catch(console.log)
-
         Promise.all(
             urls.map((f,i) => {
                 return new Promise((rs, rj) => {
+                    // setTimeout to stop too many requests per second api error
                     setTimeout(() => {
                         https.get(f,options,resp => {
                             if (resp.statusCode !== 200) { rj(new Error(`status code ${resp.statusCode}`)) }
