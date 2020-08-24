@@ -3,6 +3,7 @@
 Gets list of currency data from oanda api in parallel and saves result. Result location is `C:/myData/nodejs` for windows and `/myData/nodejs` for linux.
 
 # How to run
+* Update constants.ts values - `oanda_endpoint` and `oanda_token`
 * Have typescript installed. `npm i typescript -g`
 * Run install `npm i`
 * Compile typescript from src directory with `tsc`. This will create dist directory.
