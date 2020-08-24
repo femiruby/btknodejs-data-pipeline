@@ -11,14 +11,22 @@ Gets list of currency data from oanda api in parallel and saves result. Result l
 # Files
 ### /src
 **tsconfig.json** - typescript compiler settings
+
 **iteration.ts** - function that determines start and end iteration index for each worker
+
 **interface.ts** - data types
+
 **constants.ts** - oanda api constants
+
 **class.ts** - Instrument class
+
 ### /src/tasks
 **data.ts** - starts data worker tasks and saves result to file
+
 **data.worker.ts** - gets a list of currencies for oanda api and return result to main thread
+
 **file.ts** - helper functions for reading and writing to file
+
 ### /src/bin
 **generate.ts** - main entry point for data task
 
